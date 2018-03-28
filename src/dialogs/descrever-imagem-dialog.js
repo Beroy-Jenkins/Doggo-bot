@@ -7,7 +7,7 @@ module.exports = [
     (session, args, next) => {
         const options = {
             listStyle: builder.ListStyle.button,
-            retryPrompt: 'Deculpa, não entendi, selecione uma das opções'
+            retryPrompt: 'Deculpa, não peguei, selecione uma das opções'
         }
         builder.Prompts.choice(
             session,
