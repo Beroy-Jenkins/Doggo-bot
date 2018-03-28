@@ -1,0 +1,22 @@
+{
+  "name": "bot-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "botbuilder": "^3.14.1",
+    "descrever-imagem-dialog.js": "0.0.0",
+    "dotenv-extended": "^2.0.1",
+    "moment": "^2.21.0",
+    "needle": "^2.2.0",
+    "nodemon": "^1.17.2",
+    "restify": "^7.0.0",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Beroy",
+  "license": "ISC"
+}
