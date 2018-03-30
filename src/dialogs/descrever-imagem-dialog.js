@@ -7,22 +7,26 @@ module.exports = [
     (session, args, next) => {
         const options = {
             listStyle: builder.ListStyle.button,
-            retryPrompt: 'Deculpa, não peguei, selecione uma das opções'
+            retryPrompt: 'Deculpa, não saquei, selecione uma das opções'
         }
         builder.Prompts.choice(
             session,
             'Como você deseja me enviar a imagem?',
-            ['URL', 'Anexo'],
+            'cancelar|Anexo / Upload|URL / link',
+
             options
         )
     },
     (session, results) => {
         switch(results.response.index){
-            case 1:
-                builder.Prompts.attachment(session, 'Beleza, me envia uma imagem em ANEXO que eu descrevo o que tem nela')
+            case 0:
+                session.send('Ok, operação cancelada =)')
                 break
-            default:
-                builder.Prompts.text(session, 'Beleza, me envia a URL da imagem que eu descrevo o que tem nela')
+            case 1:
+                builder.Prompts.attachment(session, 'Ok, me envia uma imagem que eu vou tentar descrever o que tem nela')
+                break
+            case 2:
+                builder.Prompts.text(session, 'Ok, passa o link da imagem que eu vou tentar descrever o que tem nela')
                 break
         }
     },
@@ -65,7 +69,7 @@ const descreverSucces = (session) => {
 
 const descreverError = (session) => {
     return (error) => {
-        let errorMessage = 'Opa, algo deu errado. Tente novamente depois.'
+        let errorMessage = 'Droga, algo deu errado... Brigue com o admin e tente novamente depois.'
         if(error.message && error.message.indexOf('Access denied') > -1)
             errorMessage += '\n' + error.message
         session.send(errorMessage)

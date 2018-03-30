@@ -1,7 +1,11 @@
 ﻿require('dotenv-extended').load()
 const restify = require('restify');
 const builder = require('botbuilder');
+const https = require('https');
+
+const AzureBingSearch  = require('./src/services/azure-bing-search');
 const descreverImagemDialog = require('./src/dialogs/descrever-imagem-dialog');
+const pesquisarDialog = require('./src/dialogs/pesquisar-dialog');
 
 // Setup Restify Server
 
@@ -41,6 +45,8 @@ const intents = new builder.IntentDialog({
     recognizers: [recognizer]
 })
 
+
+
 intents.onDefault((session, args) => {
     session.send(`Desculpe, não entendi: **${session.message.text}**\n\nSou um bot com conhecimento limitado ainda =).`)
 })
@@ -51,20 +57,16 @@ intents.matches('consciencia',(session,args) =>{
     session.send('Sou o Bot Doggo, desenvolvido pra ajuda em pesquisas rapidas na web =)');
 })
 intents.matches('ajuda',(session,args) =>{
-    session.send('consigo fazer buscas na web de maneira rapida e facil, é so falar =)');
+    session.send('Consigo fazer buscas na web de maneira rapida e facil e também de descrever algumas imagens, é so falar =)');
 })
-intents.matches('pesquisar',(session,args) =>{
-    session.send('o que vc quer procurar?');
-})
+
+intents.matches('pesquisar', pesquisarDialog)
+
 intents.matches('pesquisar-imagem',(session,args) =>{
-    session.send('que imagem vc quer encontar?');
+    session.send('Que imagem vc quer encontar?');
 })
 intents.matches('descrever-imagem', descreverImagemDialog)
 bot.dialog('/',intents) 
-
-
-
-
 
 
 
@@ -133,3 +135,42 @@ var bot = new builder.UniversalBot(connector, function (session) {
     
 });
 */
+
+
+/* //////////////////////////////pesquisar 
+var builder = require('botbuilder');
+
+let response_handler = function (response) {
+    let body = '';
+    response.on('data', function (d) {
+        body += d;
+    });
+    response.on('end', function () {
+        console.log('\nRelevant Headers:\n');
+        for (var header in response.headers)
+            // header keys are lower-cased by Node.js
+            if (header.startsWith("bingapis-") || header.startsWith("x-msedge-"))
+                 console.log(header + ": " + response.headers[header]);
+        body = JSON.stringify(JSON.parse(body), null, '  ');
+        console.log('\nJSON Response:\n');
+        console.log(body);
+    });
+    response.on('error', function (e) {
+        console.log('Error: ' + e.message);
+    });
+};
+
+let bing_web_search = function (search) {
+  console.log('Searching the Web for: + algo ' );
+  let request_params = {
+        method : 'GET',
+        hostname : host,
+        path : path + '?q=' + encodeURIComponent(search),
+        headers : {
+            'Ocp-Apim-Subscription-Key' : subscriptionKey,
+        }
+    };
+
+    let req = https.request(request_params, response_handler);
+    req.end();
+}*/
