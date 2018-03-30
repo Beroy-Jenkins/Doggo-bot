@@ -2,8 +2,6 @@
 const restify = require('restify');
 const builder = require('botbuilder');
 const https = require('https');
-
-const AzureBingSearch  = require('./src/services/azure-bing-search');
 const descreverImagemDialog = require('./src/dialogs/descrever-imagem-dialog');
 const pesquisarDialog = require('./src/dialogs/pesquisar-dialog');
 
@@ -51,126 +49,14 @@ intents.onDefault((session, args) => {
     session.send(`Desculpe, não entendi: **${session.message.text}**\n\nSou um bot com conhecimento limitado ainda =).`)
 })
 intents.matches('saudar',(session,args) =>{
-    session.send('Heya, tudo de otimo! muito bom conheçer voce');
+    session.send('Heya, tudo de otimo! muito bom conhecer voce');
 })
 intents.matches('consciencia',(session,args) =>{
-    session.send('Sou o Bot Doggo, desenvolvido pra ajuda em pesquisas rapidas na web =)');
+    session.send('Sou o Bot Doggo, desenvolvido pra ajudar em pesquisas rapidas na web e em descrever certas imagems. =)');
 })
 intents.matches('ajuda',(session,args) =>{
-    session.send('Consigo fazer buscas na web de maneira rapida e facil e também de descrever algumas imagens, é so falar =)');
+    session.send('Consigo fazer buscas na web de maneira rapida e facil e também de descrever algumas imagens, é so falar oque vc quer fazer. =)');
 })
-
 intents.matches('pesquisar', pesquisarDialog)
-
-intents.matches('pesquisar-imagem',(session,args) =>{
-    session.send('Que imagem vc quer encontar?');
-})
 intents.matches('descrever-imagem', descreverImagemDialog)
 bot.dialog('/',intents) 
-
-
-
-
-/*
-var inMemoryStorage = new builder.MemoryBotStorage();
-// This is a dinner reservation bot that uses multiple dialogs to prompt users for input.
-var bot = new builder.UniversalBot(connector, [
-    function (session) {
-        session.send("Olá.");
-        session.beginDialog('askForDateTime');
-    },
-    function (session, results) {
-        session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
-        session.beginDialog('askForPartySize');
-    },
-    function (session, results) {
-        session.dialogData.partySize = results.response;
-        session.beginDialog('askForReserverName');
-    },
-    function (session, results) {
-        session.dialogData.reservationName = results.response;
-
-        // Process request and display reservation details
-        session.send(`Reservation confirmed. Reservation details: <br/>Date/Time: ${session.dialogData.reservationDate} <br/>Party size: ${session.dialogData.partySize} <br/>Reservation name: ${session.dialogData.reservationName}`);
-        session.endDialog();
-    }
-]).set('storage', inMemoryStorage); // Register in-memory storage 
-
-// Dialog to ask for a date and time
-bot.dialog('askForDateTime', [
-    function (session) {
-        builder.Prompts.time(session, "Please provide a reservation date and time (e.g.: June 6th at 5pm)");
-    },
-    function (session, results) {
-        session.endDialogWithResult(results);
-    }
-]);
-
-// Dialog to ask for number of people in the party
-bot.dialog('askForPartySize', [
-    function (session) {
-        builder.Prompts.text(session, "How many people are in your party?");
-    },
-    function (session, results) {
-        session.endDialogWithResult(results);
-    }
-])
-
-// Dialog to ask for the reservation name.
-bot.dialog('askForReserverName', [
-    function (session) {
-        builder.Prompts.text(session, "Who's name will this reservation be under?");
-    },
-    function (session, results) {
-        session.endDialogWithResult(results);
-    }
-]);
-*/
-/*
-// Receive messages from the user and respond by echoing each message back (prefixed with 'You said:')
-var bot = new builder.UniversalBot(connector, function (session) {
-    session.send("You said: %s", session.message.text);
-    session.send("You are: %s", session.userData.name);
-
-    
-});
-*/
-
-
-/* //////////////////////////////pesquisar 
-var builder = require('botbuilder');
-
-let response_handler = function (response) {
-    let body = '';
-    response.on('data', function (d) {
-        body += d;
-    });
-    response.on('end', function () {
-        console.log('\nRelevant Headers:\n');
-        for (var header in response.headers)
-            // header keys are lower-cased by Node.js
-            if (header.startsWith("bingapis-") || header.startsWith("x-msedge-"))
-                 console.log(header + ": " + response.headers[header]);
-        body = JSON.stringify(JSON.parse(body), null, '  ');
-        console.log('\nJSON Response:\n');
-        console.log(body);
-    });
-    response.on('error', function (e) {
-        console.log('Error: ' + e.message);
-    });
-};
-
-let bing_web_search = function (search) {
-  console.log('Searching the Web for: + algo ' );
-  let request_params = {
-        method : 'GET',
-        hostname : host,
-        path : path + '?q=' + encodeURIComponent(search),
-        headers : {
-            'Ocp-Apim-Subscription-Key' : subscriptionKey,
-        }
-    };
-
-    let req = https.request(request_params, response_handler);
-    req.end();
-}*/

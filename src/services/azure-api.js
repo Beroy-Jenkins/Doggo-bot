@@ -1,12 +1,9 @@
 const request = require('request').defaults({ encoding: null })
-
 class AzureApi {
-
     constructor(endpoint, key) {
         this._endpoint = endpoint
         this._key = key
     }
-
     findFromStrem(stream) {
         return new Promise((resolve, reject) => {
             const payload = {
@@ -27,7 +24,6 @@ class AzureApi {
             }))
         })
     }
-
     findFromUrl(url) {
         return new Promise((resolve, reject) => {
             const payload = {
@@ -50,5 +46,4 @@ class AzureApi {
     }
 
 }
-
 module.exports = AzureApi

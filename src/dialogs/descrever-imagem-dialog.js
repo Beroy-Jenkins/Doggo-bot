@@ -7,13 +7,12 @@ module.exports = [
     (session, args, next) => {
         const options = {
             listStyle: builder.ListStyle.button,
-            retryPrompt: 'Deculpa, não saquei, selecione uma das opções'
+            retryPrompt: 'Deculpa, não entendi, selecione uma das opções'
         }
         builder.Prompts.choice(
             session,
             'Como você deseja me enviar a imagem?',
             'cancelar|Anexo / Upload|URL / link',
-
             options
         )
     },

@@ -1,5 +1,4 @@
 const AzureApi = require('./azure-api')
-
 class AzureBingSearch extends AzureApi {
 
     constructor() {
@@ -8,7 +7,5 @@ class AzureBingSearch extends AzureApi {
         super(API_URL, API_KEY)
         this.path = '/bing/v7.0/search';
     }
-
 }
-
 module.exports = AzureBingSearch
