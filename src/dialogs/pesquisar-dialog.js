@@ -32,12 +32,14 @@ module.exports = [
           session.send('Consegui encotrar algo: ');
           for (var i = 0; i < value.length; i++ ) {
               var o = value[i];
-
-              const message = 
-              `name: **${ o.name }**\n\n`
-              + `url: **${ o.url}**\n\n`
-              + `display url: **${o.displayUrl}**\n\n`
-              + `snippet: **${ o.snippet}**\n\n`
+              const card = new builder.HeroCard(session)
+                .title(o.name)
+                .subtitle(o.displayUrl)
+                .text(o.snippet)
+                .buttons([
+                    builder.CardAction.openUrl(session, o.url, 'Acesse o site')
+                ])
+                const message = new builder.Message(session).addAttachment(card)
 
              session.send(message);
   
