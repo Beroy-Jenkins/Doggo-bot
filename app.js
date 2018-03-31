@@ -5,16 +5,12 @@ const https = require('https');
 const descreverImagemDialog = require('./src/dialogs/descrever-imagem-dialog');
 const pesquisarDialog = require('./src/dialogs/pesquisar-dialog');
 
-// Setup Restify Server
-
 const port =  process.env.PORT;
 const server = restify.createServer();
 server.listen(port,  function () {
     console.log('%s listening to %s', server.name, server.url);
 });
 
-
-// Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
@@ -34,10 +30,8 @@ bot.on('conversationUpdate', update => {
     })
 })
 
-// Listen for messages from users 
 server.post('/api/messages', connector.listen());
 
-//Luis
 const recognizer = new builder.LuisRecognizer(process.env.LUIS_MODEL_URL)
 const intents = new builder.IntentDialog({
     recognizers: [recognizer]
@@ -49,7 +43,7 @@ intents.onDefault((session, args) => {
     session.send(`Desculpe, não entendi: **${session.message.text}**\n\nSou um bot com conhecimento limitado ainda =).`)
 })
 intents.matches('saudar',(session,args) =>{
-    session.send('Heya, tudo de otimo! muito bom conhecer voce');
+    session.send('Heya! muito bom conhecer você!');
 })
 intents.matches('consciencia',(session,args) =>{
     session.send('Sou o Bot Doggo, desenvolvido pra ajudar em pesquisas rapidas na web e em descrever certas imagems. =)');
