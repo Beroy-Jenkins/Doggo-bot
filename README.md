@@ -6,3 +6,4 @@ Usando os serviços Cognitivos:
   <li><a href="https://azure.microsoft.com/pt-br/services/cognitive-services/bing-web-search-api/ ">Pesquisa na Web do Bing</a></li>
 </ul>  
 E também o serviço baseado em aprendizado de máquina: <a href="https://www.luis.ai/home">Luis</a>
+O bot já está disponivel no telegram: @Doggo_theBot
