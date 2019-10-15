@@ -29,6 +29,7 @@ module.exports = [
                 break
         }
     },
+    
     (session, results) => {
         const computerVisionService = new AzureComputerVision()
         if(utils.hasImageAttachment(session)){
@@ -38,20 +39,20 @@ module.exports = [
                 .catch(descreverError(session))
         }
         else {
+            
             const imageUrl = utils.parseAnchorTag(session.message.text) || (validUrl.isUri(session.message.text) ? session.message.text : null)
             if(imageUrl){
                 computerVisionService.findFromUrl(imageUrl)
                     .then(descreverSucces(session))
                     .catch(descreverError(session))
-            }
-            else {
-                session.send('Não consegui identificar a imagem corretamente. Tente novamente.')
-            }
+            }else {
+                    session.send('Não consegui identificar a imagem corretamente. Tente novamente.')
+                }
         }
     }
 ]
 
-const descreverSucces = (session) => {
+const descreverSucces =     (session) => {
     return (result) => {
         if(!result)
             return session.send('Não consegui descrever essa imagem')

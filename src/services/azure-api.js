@@ -23,10 +23,11 @@ class AzureApi {
                 resolve(body)
             }))
         })
+        
     }
     findFromUrl(url) {
         return new Promise((resolve, reject) => {
-            const payload = {
+            const payload =  {
                 url: this._endpoint,
                 json: { 'url': url},
                 headers: {
