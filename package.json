@@ -4,11 +4,11 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "botbuilder": "^3.13.1",
-    "dotenv-extended": "^2.4.0",
+    "botbuilder": "^3.14.1",
+    "dotenv-extended": "^2.5.0",
     "moment": "^2.24.0",
     "needle": "^2.4.0",
-    "nodemon": "^1.19.3",
+    "nodemon": "^1.19.4",
     "restify": "^8.4.0",
     "valid-url": "^1.0.9"
   },

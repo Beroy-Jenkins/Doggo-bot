@@ -18,6 +18,14 @@ module.exports = [
               'Ocp-Apim-Subscription-Key' : azureBingSearch._key,
           }
       };
+
+    // let request_params = {  
+    //     hostname : 'doggo-thebot-search.cognitiveservices.azure.com',
+    //     path : '/bing/v7.0/search?q=' + encodeURIComponent(session.message.text),
+    //     headers : {
+    //         'Ocp-Apim-Subscription-Key' : azureBingSearch._key,
+    //     }
+    //   };
   
       let req = https.request(request_params, function (response) {
           let body = '';
