@@ -46,10 +46,10 @@ intents.matches('saudar',(session,args) =>{
     session.send('Heya! muito bom conhecer você!');
 })
 intents.matches('consciencia',(session,args) =>{
-    session.send('Sou o Bot Doggo, desenvolvido pra ajudar em pesquisas rapidas na web e em descrever certas imagems. =)');
+    session.send('Sou o Bot Doggo, desenvolvido pra ajudar em pesquisas rápidas na web e em descrever certas imagens. =)');
 })
 intents.matches('ajuda',(session,args) =>{
-    session.send('Consigo fazer buscas na web de maneira rapida e facil e também de descrever algumas imagens, é so falar oque vc quer fazer. =)');
+    session.send('Consigo fazer buscas na web de maneira rápida, fácil e de descrever algumas imagens, é só falar o que você quer fazer. =)');
 })
 intents.matches('pesquisar', pesquisarDialog)
 intents.matches('descrever-imagem', descreverImagemDialog)

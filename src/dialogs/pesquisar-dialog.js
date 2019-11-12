@@ -15,8 +15,8 @@ module.exports = [
             path: azureBingSearch.path +
                 '?q=' +
                 encodeURIComponent(session.message.text) +
-                'count=3' +
-                'safeSearch=off',
+                '&count=3' +
+                '&safeSearch=off',
             headers: {
                 'Ocp-Apim-Subscription-Key': azureBingSearch._key,
             }
